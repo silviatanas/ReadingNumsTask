@@ -6,6 +6,14 @@ import java.util.Scanner;
 
 public class WritingRandomInts {
     public static void main(String[] args) {
+        
+        // Filepath user input
+        Scanner inputPath = new Scanner(System.in);
+        System.out.println("Enter file path:");
+        String filePath = inputPath.nextLine();
+
+        File file = new File(filePath);
+        FileWriter writer = null;
 
         // Inputting file size
         Scanner sizeInput = new Scanner(System.in);
@@ -19,10 +27,6 @@ public class WritingRandomInts {
         // Random ints initialization
         Random random = new Random();
         int num;
-
-        // File
-        File file = new File("randomNums.txt");
-        FileWriter writer = null;
 
         // Creating file, checking if a file already exists, writing/overriding file
         try {
