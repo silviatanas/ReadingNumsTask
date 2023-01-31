@@ -1,4 +1,4 @@
-package writing;
+package task;
 
 import java.io.*;
 import java.util.Random;
