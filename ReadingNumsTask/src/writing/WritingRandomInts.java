@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
-public class WritingRandomInts {
-    public static void main(String[] args) {
+public abstract class WritingRandomInts {
+    public static File writing(long[] startTime) {
 
         // Filepath user input
         Scanner inputPath = new Scanner(System.in);
@@ -15,16 +15,16 @@ public class WritingRandomInts {
         String filePath = inputPath.nextLine();
 
         File file = new File(filePath);
-        FileWriter writer = null;
+        FileWriter writer;
 
         // Inputting file size
         Scanner sizeInput = new Scanner(System.in);
-        int megabytes;
+        double megabytes;
 
         while (true) {
             System.out.println("Enter file size up to 10GB (input is in MB):");
-            if (sizeInput.hasNextInt()) {
-                megabytes = sizeInput.nextInt();
+            if (sizeInput.hasNextDouble()) {
+                megabytes = sizeInput.nextDouble();
                 if (megabytes <= 10_240) {
                     break;
                 }
@@ -34,8 +34,9 @@ public class WritingRandomInts {
             }
         }
 
-        int bytes = megabytes * 1024 * 1024;
+        double bytes = megabytes * 1024 * 1024;
 
+        // Override selection
         Scanner selection = new Scanner(System.in);
         String select;
 
@@ -60,20 +61,21 @@ public class WritingRandomInts {
                         System.exit(0);
                     }
                 } while (!select.equalsIgnoreCase("y"));
+            }
+            // START
+            startTime[0] = System.nanoTime();
+            System.out.println("Proceeding to write into file...");
 
-                System.out.println("Proceeding to write into file...");
+            writer = new FileWriter(file);
 
-                writer = new FileWriter(file);
-
-                // Filling file with random ints separated by ;
-                while (file.length() <= bytes) {
-                    num = random.nextInt();
-                    try {
-                        writer.write(num + ";");
-                    } catch (IOException e) {
-                        System.out.println("Error in writing in file.\nEnding program.");
-                        e.printStackTrace();
-                    }
+            // Filling file with random ints separated by ;
+            while (file.length() <= bytes) {
+                num = random.nextInt();
+                try {
+                    writer.write(num + ";");
+                } catch (IOException e) {
+                    System.out.println("Error in writing in file.\nEnding program.");
+                    e.printStackTrace();
                 }
             }
         } catch (IOException e) {
@@ -81,6 +83,6 @@ public class WritingRandomInts {
             e.printStackTrace();
         }
 
-        System.out.println("Operations finished");
+        return file;
     }
 }
