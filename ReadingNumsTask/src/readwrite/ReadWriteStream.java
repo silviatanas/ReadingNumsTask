@@ -9,8 +9,7 @@ import java.util.stream.Collectors;
 public class ReadWriteStream extends WritingRandomInts {
     public static void main(String[] args) {
 
-        long endTime, finalTime;
-        long[] startTime = {0};
+        long startTime, endTime, finalTime;
 
         File file = writing(startTime);
 
@@ -38,6 +37,9 @@ public class ReadWriteStream extends WritingRandomInts {
 
         // String into String array
         String[] readingFileArr = readingFile.split(";"); // separating the string to arr elements
+        
+        // START
+        startTime = System.nanoTime();
 
         // Using stream
         Arrays.stream(readingFileArr)
