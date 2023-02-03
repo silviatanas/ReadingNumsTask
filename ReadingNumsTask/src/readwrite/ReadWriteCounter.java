@@ -6,8 +6,7 @@ import java.io.*;
 public class ReadWriteCounter extends WritingRandomInts {
     public static void main(String[] args) {
 
-        long endTime, finalTime;
-        long[] startTime = {0};
+        long startTime, endTime, finalTime;
 
         File file = writing(startTime);
 
@@ -42,6 +41,9 @@ public class ReadWriteCounter extends WritingRandomInts {
         for (int i = 0; i < readingFileArr.length; i++) {
             numsArr[i] = Integer.parseInt(readingFileArr[i]);
         }
+        
+        // START
+        startTime = System.nanoTime();
 
         // Using counter in array
         int counter;
@@ -71,7 +73,7 @@ public class ReadWriteCounter extends WritingRandomInts {
 
         // END
         endTime = System.nanoTime();
-        finalTime = endTime - startTime[0];
+        finalTime = endTime - startTime;
 
         System.out.println("TOTAL TIME: " + finalTime / 1_000_000_000 + " seconds");
     }
