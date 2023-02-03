@@ -11,10 +11,22 @@ public abstract class WritingRandomInts {
 
         // Filepath user input
         Scanner inputPath = new Scanner(System.in);
-        System.out.println("Enter file path:");
-        String filePath = inputPath.nextLine();
+        boolean isDirectory = false;
+        File file = null;
 
-        File file = new File(filePath);
+        // Check for directory
+        while (!isDirectory) {
+            System.out.println("Enter file path:");
+            String filePath = inputPath.nextLine();
+            file = new File(filePath);
+
+            if (file.isDirectory()) {
+                System.out.println("This is a directory, you need to specify a file.");
+            } else {
+                isDirectory = true;
+            }
+        }
+        
         FileWriter writer;
 
         // Inputting file size
