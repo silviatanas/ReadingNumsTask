@@ -87,6 +87,8 @@ public abstract class WritingRandomInts {
                     e.printStackTrace();
                 }
             }
+            writer.close();
+            
         } catch (IOException e) {
             System.out.println("Something sure isn't right.\nEnding program.");
             e.printStackTrace();
