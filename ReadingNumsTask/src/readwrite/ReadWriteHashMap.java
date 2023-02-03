@@ -8,8 +8,7 @@ import java.util.HashMap;
 public class ReadWriteHashMap extends WritingRandomInts {
     public static void main(String[] args) {
 
-        long endTime, finalTime;
-        long[] startTime = {0};
+        long startTime, endTime, finalTime;
 
         File file = writing(startTime);
 
@@ -44,6 +43,9 @@ public class ReadWriteHashMap extends WritingRandomInts {
         for (int i = 0; i < readingFileArr.length; i++) {
             numsArr[i] = Integer.parseInt(readingFileArr[i]);
         }
+        
+        // START
+        startTime = System.nanoTime();
 
         // Using hashmap to count occurrences
         HashMap<Integer, Integer> countingNums = new HashMap<>();
@@ -62,7 +64,7 @@ public class ReadWriteHashMap extends WritingRandomInts {
 
         // END
         endTime = System.nanoTime();
-        finalTime = endTime - startTime[0];
+        finalTime = endTime - startTime;
 
         System.out.println("TOTAL TIME: " + finalTime / 1_000_000_000 + " seconds");
     }
