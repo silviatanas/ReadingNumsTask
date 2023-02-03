@@ -62,9 +62,6 @@ public abstract class WritingRandomInts {
                     }
                 } while (!select.equalsIgnoreCase("y"));
             }
-            // START
-            startTime[0] = System.nanoTime();
-            System.out.println("Proceeding to write into file...");
 
             writer = new FileWriter(file);
 
