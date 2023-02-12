@@ -12,7 +12,8 @@ public class ReadWriteHashMap extends WritingRandomInts {
         long startTime, endTime, finalTime;
         File file = null;
         String[] readingFileArr = new String[0];
-        
+        int[] numsArr;
+
         try {
             file = writing();
 
@@ -27,15 +28,16 @@ public class ReadWriteHashMap extends WritingRandomInts {
                 readingFileArr = readingFile.split(";"); // separating the string to arr elements
             } catch (IOException e) {
                 System.out.println("Error in reading file.\nGenerating 1MB array of numbers.");
-                int[] numsArr = new int[250_000];
+                numsArr = new int[250_000];
             }
+
+            // Making an array of numbers
+            numsArr = new int[readingFileArr.length];
+
         } catch (WritingException e) {
             System.out.println("Error in writing program.");
-            e.printStackTrace();
+            numsArr = new int[250_000];
         }
-
-        // Making an array of numbers
-        int[] numsArr = new int[readingFileArr.length];
 
         for (int i = 0; i < readingFileArr.length; i++) {
             numsArr[i] = Integer.parseInt(readingFileArr[i]);
