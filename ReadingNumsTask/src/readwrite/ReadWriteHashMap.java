@@ -11,36 +11,28 @@ public class ReadWriteHashMap extends WritingRandomInts {
 
         long startTime, endTime, finalTime;
         File file = null;
-
+        String[] readingFileArr = new String[0];
+        
         try {
             file = writing();
+
+            // Turning file to string to array
+            BufferedReader fileData;
+            String readingFile;
+            readingFileArr = new String[0];
+
+            try {
+                fileData = new BufferedReader(new FileReader(file));
+                readingFile = fileData.readLine();
+                readingFileArr = readingFile.split(";"); // separating the string to arr elements
+            } catch (IOException e) {
+                System.out.println("Error in reading file.\nGenerating 1MB array of numbers.");
+                int[] numsArr = new int[250_000];
+            }
         } catch (WritingException e) {
             System.out.println("Error in writing program.");
             e.printStackTrace();
         }
-
-        System.out.println("--------------------------------------------");
-        System.out.println("Creation operations finished");
-        System.out.println("Reading file...");
-        System.out.println("--------------------------------------------");
-
-        // Turning file to string to array
-        BufferedReader fileData;
-        String readingFile;
-        String[] readingFileArr = new String[0];
-        try {
-            fileData = new BufferedReader(new FileReader(file));
-            readingFile = fileData.readLine();
-            readingFileArr = readingFile.split(";"); // separating the string to arr elements
-        } catch (FileNotFoundException e) {
-            System.out.println("Error in finding file.\nGenerating 1MB array of numbers.");
-            int[] numsArr = new int[250_000];
-        } catch (IOException e) {
-            System.out.println("Error in reading file.\nGenerating 1MB array of numbers.");
-            int[] numsArr = new int[250_000];
-        }
-        
-        // ?
 
         // Making an array of numbers
         int[] numsArr = new int[readingFileArr.length];
