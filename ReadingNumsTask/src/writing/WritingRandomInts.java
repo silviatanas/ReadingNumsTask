@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
-public abstract class WritingRandomInts {
-    public static File writing(long[] startTime) {
+public abstract class WritingRandomInts  {
+    public static File writing() throws WritingException {
 
         // Filepath user input
         Scanner inputPath = new Scanner(System.in);
@@ -26,7 +26,7 @@ public abstract class WritingRandomInts {
                 isDirectory = true;
             }
         }
-        
+
         FileWriter writer;
 
         // Inputting file size
@@ -37,7 +37,7 @@ public abstract class WritingRandomInts {
             System.out.println("Enter file size up to 10GB (input is in MB):");
             if (sizeInput.hasNextDouble()) {
                 megabytes = sizeInput.nextDouble();
-                if (megabytes <= 10_240) {
+                if (megabytes > 0 && megabytes <= 10_240) {
                     break;
                 }
             } else {
@@ -74,6 +74,7 @@ public abstract class WritingRandomInts {
                     }
                 } while (!select.equalsIgnoreCase("y"));
             }
+            System.out.println("Proceeding to write into file...");
 
             writer = new FileWriter(file);
 
@@ -88,10 +89,11 @@ public abstract class WritingRandomInts {
                 }
             }
             writer.close();
-            
+
         } catch (IOException e) {
-            System.out.println("Something sure isn't right.\nEnding program.");
+            System.out.println("Error in writing program.\nEnding program.");
             e.printStackTrace();
+            throw new WritingException(e.getMessage());
         }
 
         return file;
