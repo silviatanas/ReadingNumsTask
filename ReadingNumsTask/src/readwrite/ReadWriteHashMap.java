@@ -1,41 +1,46 @@
 package readwrite;
 
+import writing.WritingException;
 import writing.WritingRandomInts;
 
 import java.io.*;
 import java.util.HashMap;
 
 public class ReadWriteHashMap extends WritingRandomInts {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         long startTime, endTime, finalTime;
+        File file = null;
 
-        File file = writing(startTime);
+        try {
+            file = writing();
+        } catch (WritingException e) {
+            System.out.println("Error in writing program.");
+            e.printStackTrace();
+        }
 
         System.out.println("--------------------------------------------");
         System.out.println("Creation operations finished");
         System.out.println("Reading file...");
         System.out.println("--------------------------------------------");
 
-        BufferedReader fileData = null;
+        // Turning file to string to array
+        BufferedReader fileData;
+        String readingFile;
+        String[] readingFileArr = new String[0];
         try {
             fileData = new BufferedReader(new FileReader(file));
-        } catch (FileNotFoundException e) {
-            System.out.println("Error in finding file.\nEnding program.");
-            e.printStackTrace();
-        }
-
-        // File goes into a String
-        String readingFile = null;
-        try {
             readingFile = fileData.readLine();
+            readingFileArr = readingFile.split(";"); // separating the string to arr elements
+        } catch (FileNotFoundException e) {
+            System.out.println("Error in finding file.\nGenerating 1MB array of numbers.");
+            int[] numsArr = new int[250_000];
         } catch (IOException e) {
-            System.out.println("Error in reading file.\nEnding program.");
-            e.printStackTrace();
+            System.out.println("Error in reading file.\nGenerating 1MB array of numbers.");
+            int[] numsArr = new int[250_000];
         }
-
-        // String into String array
-        String[] readingFileArr = readingFile.split(";"); // separating the string to arr elements
+        
+        // ?
 
         // Making an array of numbers
         int[] numsArr = new int[readingFileArr.length];
@@ -43,7 +48,7 @@ public class ReadWriteHashMap extends WritingRandomInts {
         for (int i = 0; i < readingFileArr.length; i++) {
             numsArr[i] = Integer.parseInt(readingFileArr[i]);
         }
-        
+
         // START
         startTime = System.nanoTime();
 
