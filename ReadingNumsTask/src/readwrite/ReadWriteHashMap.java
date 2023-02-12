@@ -5,11 +5,14 @@ import writing.WritingRandomInts;
 
 import java.io.*;
 import java.util.HashMap;
+import java.util.Random;
 
 public class ReadWriteHashMap extends WritingRandomInts {
     public static void main(String[] args) throws Exception {
 
         long startTime, endTime, finalTime;
+        Random random = new Random();
+        
         File file = null;
         String[] readingFileArr = new String[0];
         int[] numsArr;
@@ -20,7 +23,6 @@ public class ReadWriteHashMap extends WritingRandomInts {
             // Turning file to string to array
             BufferedReader fileData;
             String readingFile;
-            readingFileArr = new String[0];
 
             try {
                 fileData = new BufferedReader(new FileReader(file));
@@ -29,18 +31,26 @@ public class ReadWriteHashMap extends WritingRandomInts {
             } catch (IOException e) {
                 System.out.println("Error in reading file.\nGenerating 1MB array of numbers.");
                 numsArr = new int[250_000];
+
+                for (int i = 0; i < numsArr.length; i++) {
+                    numsArr[i] = random.nextInt();
+                }
             }
 
             // Making an array of numbers
             numsArr = new int[readingFileArr.length];
 
+            for (int i = 0; i < readingFileArr.length; i++) {
+                numsArr[i] = Integer.parseInt(readingFileArr[i]);
+            }
+
         } catch (WritingException e) {
             System.out.println("Error in writing program.");
             numsArr = new int[250_000];
-        }
 
-        for (int i = 0; i < readingFileArr.length; i++) {
-            numsArr[i] = Integer.parseInt(readingFileArr[i]);
+            for (int i = 0; i < numsArr.length; i++) {
+                numsArr[i] = random.nextInt();
+            }
         }
 
         // START
