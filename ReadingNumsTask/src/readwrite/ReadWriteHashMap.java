@@ -10,6 +10,8 @@ import java.util.Random;
 public class ReadWriteHashMap extends WritingRandomInts {
     public static void main(String[] args) throws Exception {
 
+        // test
+
         long startTime, endTime, finalTime;
         Random random = new Random();
         
